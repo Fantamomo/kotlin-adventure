@@ -5,7 +5,7 @@ import net.kyori.adventure.text.ComponentBuilder
 import net.kyori.adventure.text.ComponentLike
 
 @ComponentDsl
-interface KComponentBuilder<C : BuildableComponent<C, B>, B : ComponentBuilder<C, B>> : Styleable<B> {
+interface KComponentBuilder<C : BuildableComponent<C, B>, B : ComponentBuilder<C, B>> : KStyleable<B> {
     override val builder: B
 
     fun build(): C
