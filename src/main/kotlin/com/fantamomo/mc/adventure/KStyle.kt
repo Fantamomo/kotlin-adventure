@@ -6,7 +6,7 @@ import kotlin.contracts.InvocationKind
 import kotlin.contracts.contract
 
 @ComponentDsl
-class KStyle : Styleable<Style.Builder>{
+class KStyle : KStyleable<Style.Builder>{
     override val builder: Style.Builder = Style.style()
 
     fun build() = builder.build()
