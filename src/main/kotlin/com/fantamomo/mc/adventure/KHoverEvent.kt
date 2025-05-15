@@ -82,12 +82,12 @@ sealed interface KHoverEventBuilder<T : KHoverEventType<T, B, V>, B : KHoverEven
 }
 
 
-fun Styleable<*>.hoverEvent(hoverEvent: HoverEvent<*>) {
+fun KStyleable<*>.hoverEvent(hoverEvent: HoverEvent<*>) {
     builder.hoverEvent(hoverEvent)
 }
 
 @OptIn(ExperimentalContracts::class)
-fun <T : KHoverEventType<T, B, V>, B : KHoverEventBuilder<T, B, V>, V> Styleable<*>.hoverEvent(
+fun <T : KHoverEventType<T, B, V>, B : KHoverEventBuilder<T, B, V>, V> KStyleable<*>.hoverEvent(
     type: T,
     builder: B.() -> Unit,
 ) {
