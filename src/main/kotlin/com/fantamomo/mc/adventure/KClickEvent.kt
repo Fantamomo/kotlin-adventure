@@ -128,12 +128,12 @@ sealed interface KClickEventBuilder<T : KClickEventType<T, B>, B : KClickEventBu
     fun buildClickEvent(): ClickEvent
 }
 
-fun Styleable<*>.clickEvent(clickEvent: ClickEvent) {
+fun KStyleable<*>.clickEvent(clickEvent: ClickEvent) {
     builder.clickEvent(clickEvent)
 }
 
 @OptIn(ExperimentalContracts::class)
-fun <T : KClickEventType<T, B>, B : KClickEventBuilder<T, B>> Styleable<*>.clickEvent(type: T, block: B.() -> Unit) {
+fun <T : KClickEventType<T, B>, B : KClickEventBuilder<T, B>> KStyleable<*>.clickEvent(type: T, block: B.() -> Unit) {
     contract { callsInPlace(block, InvocationKind.EXACTLY_ONCE) }
     val clickEvent = type.builder()
     clickEvent.block()
