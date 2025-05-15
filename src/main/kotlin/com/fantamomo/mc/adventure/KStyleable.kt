@@ -7,26 +7,27 @@ import net.kyori.adventure.text.format.StyleSetter
 import net.kyori.adventure.text.format.TextColor
 import net.kyori.adventure.text.format.TextDecoration
 
-interface Styleable<S : StyleSetter<S>> {
+@Suppress("FINITE_BOUNDS_VIOLATION_IN_JAVA")
+interface KStyleable<S : StyleSetter<*>> {
     val builder: S
 }
 
-inline fun Styleable<*>.color(color: TextColor) {
+inline fun KStyleable<*>.color(color: TextColor) {
     builder.color(color)
 }
 
-inline fun Styleable<*>.decorate(decoration: TextDecoration) {
+inline fun KStyleable<*>.decorate(decoration: TextDecoration) {
     builder.decorate(decoration)
 }
 
-inline fun Styleable<*>.decorate(vararg decorations: TextDecoration) {
+inline fun KStyleable<*>.decorate(vararg decorations: TextDecoration) {
     builder.decorate(*decorations)
 }
 
-inline fun Styleable<*>.font(key: Key) {
+inline fun KStyleable<*>.font(key: Key) {
     builder.font(key)
 }
 
-inline fun Styleable<*>.insertion(insertion: String) {
+inline fun KStyleable<*>.insertion(insertion: String) {
     builder.insertion(insertion)
 }
