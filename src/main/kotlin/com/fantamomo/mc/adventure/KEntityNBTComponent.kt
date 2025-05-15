@@ -4,6 +4,9 @@ package com.fantamomo.mc.adventure
 
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.EntityNBTComponent
+import kotlin.contracts.ExperimentalContracts
+import kotlin.contracts.InvocationKind
+import kotlin.contracts.contract
 
 class KEntityNBTComponent : KComponentBuilder<EntityNBTComponent, EntityNBTComponent.Builder> {
     override val builder: EntityNBTComponent.Builder = Component.entityNBT()
@@ -11,7 +14,9 @@ class KEntityNBTComponent : KComponentBuilder<EntityNBTComponent, EntityNBTCompo
     override fun build() = builder.build()
 }
 
+@OptIn(ExperimentalContracts::class)
 fun KComponentBuilder<*, *>.entityNBT(builder: KEntityNBTComponent.() -> Unit) {
+    contract { callsInPlace(builder, InvocationKind.EXACTLY_ONCE) }
     val entityNBT = KEntityNBTComponent()
     entityNBT.builder()
     append(entityNBT.build())

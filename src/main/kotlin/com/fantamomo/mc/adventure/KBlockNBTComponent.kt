@@ -4,6 +4,9 @@ package com.fantamomo.mc.adventure
 
 import net.kyori.adventure.text.BlockNBTComponent
 import net.kyori.adventure.text.Component
+import kotlin.contracts.ExperimentalContracts
+import kotlin.contracts.InvocationKind
+import kotlin.contracts.contract
 
 class KBlockNBTComponent : KComponentBuilder<BlockNBTComponent, BlockNBTComponent.Builder> {
     override val builder: BlockNBTComponent.Builder = Component.blockNBT()
@@ -11,7 +14,9 @@ class KBlockNBTComponent : KComponentBuilder<BlockNBTComponent, BlockNBTComponen
     override fun build() = builder.build()
 }
 
+@OptIn(ExperimentalContracts::class)
 fun KComponentBuilder<*, *>.blockNBT(builder: KBlockNBTComponent.() -> Unit) {
+    contract { callsInPlace(builder, InvocationKind.EXACTLY_ONCE) }
     val blockNBT = KBlockNBTComponent()
     blockNBT.builder()
     append(blockNBT.build())
