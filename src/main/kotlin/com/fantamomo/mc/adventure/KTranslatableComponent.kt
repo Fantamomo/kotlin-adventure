@@ -6,6 +6,9 @@ import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.ComponentLike
 import net.kyori.adventure.text.TranslatableComponent
 import net.kyori.adventure.translation.Translatable
+import kotlin.contracts.ExperimentalContracts
+import kotlin.contracts.InvocationKind
+import kotlin.contracts.contract
 
 class KTranslatableComponent : KComponentBuilder<TranslatableComponent, TranslatableComponent.Builder> {
     override val builder: TranslatableComponent.Builder = Component.translatable()
@@ -13,7 +16,9 @@ class KTranslatableComponent : KComponentBuilder<TranslatableComponent, Translat
     override fun build() = builder.build()
 }
 
+@OptIn(ExperimentalContracts::class)
 fun KComponentBuilder<*, *>.translatable(builder: KTranslatableComponent.() -> Unit) {
+    contract { callsInPlace(builder, InvocationKind.EXACTLY_ONCE) }
     val translatable = KTranslatableComponent()
     translatable.builder()
     append(translatable.build())

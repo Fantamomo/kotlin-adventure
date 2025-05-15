@@ -5,6 +5,9 @@ import net.kyori.adventure.text.event.ClickCallback
 import net.kyori.adventure.text.event.ClickEvent
 import java.net.URL
 import java.time.temporal.TemporalAmount
+import kotlin.contracts.ExperimentalContracts
+import kotlin.contracts.InvocationKind
+import kotlin.contracts.contract
 
 sealed interface KClickEventType<T : KClickEventType<T, B>, B : KClickEventBuilder<T, B>> {
     data object OpenUrl : KClickEventType<OpenUrl, KClickEventBuilder.OpenUrl> {
@@ -129,7 +132,9 @@ fun Styleable<*>.clickEvent(clickEvent: ClickEvent) {
     builder.clickEvent(clickEvent)
 }
 
+@OptIn(ExperimentalContracts::class)
 fun <T : KClickEventType<T, B>, B : KClickEventBuilder<T, B>> Styleable<*>.clickEvent(type: T, block: B.() -> Unit) {
+    contract { callsInPlace(block, InvocationKind.EXACTLY_ONCE) }
     val clickEvent = type.builder()
     clickEvent.block()
     this.builder.clickEvent(clickEvent.buildClickEvent())

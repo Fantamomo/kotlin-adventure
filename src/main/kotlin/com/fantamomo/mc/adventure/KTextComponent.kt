@@ -4,6 +4,9 @@ package com.fantamomo.mc.adventure
 
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.TextComponent
+import kotlin.contracts.ExperimentalContracts
+import kotlin.contracts.InvocationKind
+import kotlin.contracts.contract
 
 open class KTextComponent : KComponentBuilder<TextComponent, TextComponent.Builder> {
     override val builder: TextComponent.Builder = Component.text()
@@ -11,7 +14,9 @@ open class KTextComponent : KComponentBuilder<TextComponent, TextComponent.Build
     override fun build() = builder.build()
 }
 
+@OptIn(ExperimentalContracts::class)
 fun KComponentBuilder<*, *>.text(builder: KTextComponent.() -> Unit) {
+    contract { callsInPlace(builder, InvocationKind.EXACTLY_ONCE) }
     val text = KTextComponent()
     text.builder()
     append(text.build())

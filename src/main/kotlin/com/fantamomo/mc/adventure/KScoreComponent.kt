@@ -4,6 +4,9 @@ package com.fantamomo.mc.adventure
 
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.ScoreComponent
+import kotlin.contracts.ExperimentalContracts
+import kotlin.contracts.InvocationKind
+import kotlin.contracts.contract
 
 class KScoreComponent : KComponentBuilder<ScoreComponent, ScoreComponent.Builder> {
     override val builder: ScoreComponent.Builder = Component.score()
@@ -11,7 +14,9 @@ class KScoreComponent : KComponentBuilder<ScoreComponent, ScoreComponent.Builder
     override fun build() = builder.build()
 }
 
+@OptIn(ExperimentalContracts::class)
 fun KComponentBuilder<*, *>.score(builder: KScoreComponent.() -> Unit) {
+    contract { callsInPlace(builder, InvocationKind.EXACTLY_ONCE) }
     val score = KScoreComponent()
     score.builder()
     append(score.build())

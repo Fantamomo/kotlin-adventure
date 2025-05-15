@@ -6,6 +6,9 @@ import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.event.DataComponentValue
 import net.kyori.adventure.text.event.HoverEvent
 import java.util.*
+import kotlin.contracts.ExperimentalContracts
+import kotlin.contracts.InvocationKind
+import kotlin.contracts.contract
 
 sealed interface KHoverEventType<T : KHoverEventType<T, B, V>, B : KHoverEventBuilder<T, B, V>, V> {
     data object ShowText : KHoverEventType<ShowText, KHoverEventBuilder.ShowText, Component> {
@@ -83,10 +86,12 @@ fun Styleable<*>.hoverEvent(hoverEvent: HoverEvent<*>) {
     builder.hoverEvent(hoverEvent)
 }
 
+@OptIn(ExperimentalContracts::class)
 fun <T : KHoverEventType<T, B, V>, B : KHoverEventBuilder<T, B, V>, V> Styleable<*>.hoverEvent(
     type: T,
     builder: B.() -> Unit,
 ) {
+    contract { callsInPlace(builder, InvocationKind.EXACTLY_ONCE) }
     val clickEvent = type.builder()
     clickEvent.builder()
     this.builder.hoverEvent(clickEvent.buildHoverEvent())
