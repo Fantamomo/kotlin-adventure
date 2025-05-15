@@ -15,7 +15,7 @@ class KEntityNBTComponent : KComponentBuilder<EntityNBTComponent, EntityNBTCompo
 }
 
 @OptIn(ExperimentalContracts::class)
-fun KComponentBuilder<*, *>.entityNBT(builder: KEntityNBTComponent.() -> Unit) {
+inline fun KComponentBuilder<*, *>.entityNBT(builder: KEntityNBTComponent.() -> Unit) {
     contract { callsInPlace(builder, InvocationKind.EXACTLY_ONCE) }
     val entityNBT = KEntityNBTComponent()
     entityNBT.builder()

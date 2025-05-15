@@ -16,7 +16,7 @@ class KStorageNBTComponent : KComponentBuilder<StorageNBTComponent, StorageNBTCo
 }
 
 @OptIn(ExperimentalContracts::class)
-fun KComponentBuilder<*, *>.storageNBT(builder: KStorageNBTComponent.() -> Unit) {
+inline fun KComponentBuilder<*, *>.storageNBT(builder: KStorageNBTComponent.() -> Unit) {
     contract { callsInPlace(builder, InvocationKind.EXACTLY_ONCE) }
     val storageNBT = KStorageNBTComponent()
     storageNBT.builder()

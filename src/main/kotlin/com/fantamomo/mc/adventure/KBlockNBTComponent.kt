@@ -15,7 +15,7 @@ class KBlockNBTComponent : KComponentBuilder<BlockNBTComponent, BlockNBTComponen
 }
 
 @OptIn(ExperimentalContracts::class)
-fun KComponentBuilder<*, *>.blockNBT(builder: KBlockNBTComponent.() -> Unit) {
+inline fun KComponentBuilder<*, *>.blockNBT(builder: KBlockNBTComponent.() -> Unit) {
     contract { callsInPlace(builder, InvocationKind.EXACTLY_ONCE) }
     val blockNBT = KBlockNBTComponent()
     blockNBT.builder()

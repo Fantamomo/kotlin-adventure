@@ -15,7 +15,7 @@ class KScoreComponent : KComponentBuilder<ScoreComponent, ScoreComponent.Builder
 }
 
 @OptIn(ExperimentalContracts::class)
-fun KComponentBuilder<*, *>.score(builder: KScoreComponent.() -> Unit) {
+inline fun KComponentBuilder<*, *>.score(builder: KScoreComponent.() -> Unit) {
     contract { callsInPlace(builder, InvocationKind.EXACTLY_ONCE) }
     val score = KScoreComponent()
     score.builder()

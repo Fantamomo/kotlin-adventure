@@ -1,3 +1,5 @@
+@file:Suppress("NOTHING_TO_INLINE")
+
 package com.fantamomo.mc.adventure
 
 import net.kyori.adventure.text.format.Style
@@ -12,12 +14,12 @@ class KStyle : KStyleable<Style.Builder>{
     fun build() = builder.build()
 }
 
-fun KComponentBuilder<*, *>.style(style: Style) {
+inline fun KComponentBuilder<*, *>.style(style: Style) {
     builder.style(style)
 }
 
 @OptIn(ExperimentalContracts::class)
-fun KComponentBuilder<*, *>.style(builder: KStyle.() -> Unit) {
+inline fun KComponentBuilder<*, *>.style(builder: KStyle.() -> Unit) {
     contract { callsInPlace(builder, InvocationKind.EXACTLY_ONCE) }
     val style = KStyle()
     style.builder()

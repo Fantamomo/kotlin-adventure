@@ -17,7 +17,7 @@ class KTranslatableComponent : KComponentBuilder<TranslatableComponent, Translat
 }
 
 @OptIn(ExperimentalContracts::class)
-fun KComponentBuilder<*, *>.translatable(builder: KTranslatableComponent.() -> Unit) {
+inline fun KComponentBuilder<*, *>.translatable(builder: KTranslatableComponent.() -> Unit) {
     contract { callsInPlace(builder, InvocationKind.EXACTLY_ONCE) }
     val translatable = KTranslatableComponent()
     translatable.builder()

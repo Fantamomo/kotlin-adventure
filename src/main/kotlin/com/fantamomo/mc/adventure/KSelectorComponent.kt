@@ -16,7 +16,7 @@ class KSelectorComponent : KComponentBuilder<SelectorComponent, SelectorComponen
 }
 
 @OptIn(ExperimentalContracts::class)
-fun KComponentBuilder<*, *>.selector(builder: KSelectorComponent.() -> Unit) {
+inline fun KComponentBuilder<*, *>.selector(builder: KSelectorComponent.() -> Unit) {
     contract { callsInPlace(builder, InvocationKind.EXACTLY_ONCE) }
     val selector = KSelectorComponent()
     selector.builder()

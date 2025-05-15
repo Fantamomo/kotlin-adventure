@@ -15,7 +15,7 @@ open class KTextComponent : KComponentBuilder<TextComponent, TextComponent.Build
 }
 
 @OptIn(ExperimentalContracts::class)
-fun KComponentBuilder<*, *>.text(builder: KTextComponent.() -> Unit) {
+inline fun KComponentBuilder<*, *>.text(builder: KTextComponent.() -> Unit) {
     contract { callsInPlace(builder, InvocationKind.EXACTLY_ONCE) }
     val text = KTextComponent()
     text.builder()

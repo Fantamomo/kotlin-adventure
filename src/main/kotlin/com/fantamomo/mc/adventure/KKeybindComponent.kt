@@ -15,7 +15,7 @@ class KKeybindComponent : KComponentBuilder<KeybindComponent, KeybindComponent.B
 }
 
 @OptIn(ExperimentalContracts::class)
-fun KComponentBuilder<*, *>.keybind(builder: KKeybindComponent.() -> Unit) {
+inline fun KComponentBuilder<*, *>.keybind(builder: KKeybindComponent.() -> Unit) {
     contract { callsInPlace(builder, InvocationKind.EXACTLY_ONCE) }
     val keybind = KKeybindComponent()
     keybind.builder()
