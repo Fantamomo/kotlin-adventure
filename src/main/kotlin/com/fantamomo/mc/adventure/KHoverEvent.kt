@@ -26,6 +26,7 @@ sealed interface KHoverEventType<T : KHoverEventType<T, B, V>, B : KHoverEventBu
     fun builder(): B
 }
 
+@ComponentDsl
 sealed interface KHoverEventBuilder<T : KHoverEventType<T, B, V>, B : KHoverEventBuilder<T, B, V>, V> {
     class ShowText : KTextComponent(), KHoverEventBuilder<KHoverEventType.ShowText, ShowText, Component> {
 

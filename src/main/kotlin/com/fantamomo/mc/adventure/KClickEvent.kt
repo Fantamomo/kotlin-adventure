@@ -36,6 +36,7 @@ sealed interface KClickEventType<T : KClickEventType<T, B>, B : KClickEventBuild
     fun builder(): B
 }
 
+@ComponentDsl
 sealed interface KClickEventBuilder<T : KClickEventType<T, B>, B : KClickEventBuilder<T, B>> {
     class OpenUrl : KClickEventBuilder<KClickEventType.OpenUrl, OpenUrl> {
         private lateinit var url: String
