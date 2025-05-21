@@ -39,3 +39,7 @@ inline fun KTranslatableComponent.args(args: List<ComponentLike>) {
 inline fun KTranslatableComponent.args(vararg args: ComponentLike) {
     builder.arguments(*args)
 }
+
+inline fun KTranslatableComponent.fallback(fallback: String) {
+    builder.fallback(fallback)
+}
