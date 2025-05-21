@@ -4,6 +4,7 @@ package com.fantamomo.mc.adventure
 
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.TextComponent
+import net.kyori.adventure.text.format.TextColor
 import kotlin.contracts.ExperimentalContracts
 import kotlin.contracts.InvocationKind
 import kotlin.contracts.contract
@@ -20,6 +21,14 @@ inline fun KComponentBuilder<*, *>.text(builder: KTextComponent.() -> Unit) {
     val text = KTextComponent()
     text.builder()
     append(text.build())
+}
+
+inline fun KComponentBuilder<*, *>.text(content: String) {
+    append(Component.text(content))
+}
+
+inline fun KComponentBuilder<*, *>.text(content: String, color: TextColor) {
+    append(Component.text(content, color))
 }
 
 inline fun KTextComponent.content(text: String) {
