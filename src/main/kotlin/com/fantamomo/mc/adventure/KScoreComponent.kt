@@ -29,7 +29,3 @@ inline fun KScoreComponent.name(name: String) {
 inline fun KScoreComponent.objective(objective: String) {
     builder.objective(objective)
 }
-
-inline fun KScoreComponent.value(value: String) {
-    builder.value(value)
-}
