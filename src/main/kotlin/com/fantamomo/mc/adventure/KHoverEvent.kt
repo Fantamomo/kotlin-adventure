@@ -5,6 +5,7 @@ package com.fantamomo.mc.adventure
 import net.kyori.adventure.key.Key
 import net.kyori.adventure.key.Keyed
 import net.kyori.adventure.text.Component
+import net.kyori.adventure.text.ComponentLike
 import net.kyori.adventure.text.event.DataComponentValue
 import net.kyori.adventure.text.event.HoverEvent
 import java.util.*
@@ -87,6 +88,10 @@ sealed interface KHoverEventBuilder<T : KHoverEventType<T, B, V>, B : KHoverEven
 
 inline fun KStyleable<*>.hoverEvent(hoverEvent: HoverEvent<*>) {
     builder.hoverEvent(hoverEvent)
+}
+
+inline fun KStyleable<*>.hoverEvent(type: KHoverEventType.ShowText, content: ComponentLike) {
+    this.builder.hoverEvent(HoverEvent.showText(content))
 }
 
 @OptIn(ExperimentalContracts::class)
