@@ -1,6 +1,6 @@
 @file:Suppress("NOTHING_TO_INLINE")
 
-package com.fantamomo.mc.adventure
+package com.fantamomo.mc.adventure.text
 
 import net.kyori.adventure.key.Key
 import net.kyori.adventure.text.format.StyleSetter

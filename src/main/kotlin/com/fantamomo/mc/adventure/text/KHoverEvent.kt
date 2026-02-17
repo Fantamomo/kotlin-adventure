@@ -1,6 +1,6 @@
 @file:Suppress("NOTHING_TO_INLINE")
 
-package com.fantamomo.mc.adventure
+package com.fantamomo.mc.adventure.text
 
 import net.kyori.adventure.key.Key
 import net.kyori.adventure.key.Keyed
@@ -33,7 +33,7 @@ sealed interface KHoverEventType<T : KHoverEventType<T, B, V>, B : KHoverEventBu
 sealed interface KHoverEventBuilder<T : KHoverEventType<T, B, V>, B : KHoverEventBuilder<T, B, V>, V> {
     class ShowText : KTextComponent(), KHoverEventBuilder<KHoverEventType.ShowText, ShowText, Component> {
 
-        override fun buildHoverEvent() = HoverEvent.showText(build())
+        override fun buildHoverEvent() = HoverEvent.showText(builder.build())
     }
 
     class ShowItem : KHoverEventBuilder<KHoverEventType.ShowItem, ShowItem, HoverEvent.ShowItem> {
