@@ -51,7 +51,7 @@ sealed interface KHoverEventBuilder<T : KHoverEventType<T, B, V>, B : KHoverEven
         }
 
         fun nbt(block: MutableMap<Key, DataComponentValue>.() -> Unit) {
-            nbt = buildMap(block).toMutableMap()
+            nbt = mutableMapOf<Key, DataComponentValue>().apply(block)
         }
 
         override fun buildHoverEvent() = HoverEvent.showItem(item, count, nbt)
