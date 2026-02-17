@@ -1,6 +1,6 @@
 @file:Suppress("NOTHING_TO_INLINE")
 
-package com.fantamomo.mc.adventure
+package com.fantamomo.mc.adventure.text
 
 import net.kyori.adventure.text.BlockNBTComponent
 import net.kyori.adventure.text.Component
@@ -8,18 +8,15 @@ import kotlin.contracts.ExperimentalContracts
 import kotlin.contracts.InvocationKind
 import kotlin.contracts.contract
 
-class KBlockNBTComponent : KComponentBuilder<BlockNBTComponent, BlockNBTComponent.Builder> {
-    override val builder: BlockNBTComponent.Builder = Component.blockNBT()
-
-    override fun build() = builder.build()
-}
+class KBlockNBTComponent(override val builder: BlockNBTComponent.Builder = Component.blockNBT()) :
+    KComponentBuilder<BlockNBTComponent, BlockNBTComponent.Builder>
 
 @OptIn(ExperimentalContracts::class)
 inline fun KComponentBuilder<*, *>.blockNBT(builder: KBlockNBTComponent.() -> Unit) {
     contract { callsInPlace(builder, InvocationKind.EXACTLY_ONCE) }
     val blockNBT = KBlockNBTComponent()
     blockNBT.builder()
-    append(blockNBT.build())
+    this.builder.append(blockNBT.builder.build())
 }
 
 inline fun KBlockNBTComponent.pos(pos: BlockNBTComponent.Pos) {

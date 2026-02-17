@@ -1,8 +1,12 @@
 @file:Suppress("NOTHING_TO_INLINE")
 
-package com.fantamomo.mc.adventure
+package com.fantamomo.mc.adventure.text
 
 import net.kyori.adventure.audience.Audience
+import net.kyori.adventure.dialog.DialogLike
+import net.kyori.adventure.key.Key
+import net.kyori.adventure.nbt.api.BinaryTagHolder
+import net.kyori.adventure.text.ComponentLike
 import net.kyori.adventure.text.event.ClickCallback
 import net.kyori.adventure.text.event.ClickEvent
 import java.net.URL
@@ -15,7 +19,6 @@ sealed interface KClickEventType<T : KClickEventType<T, B>, B : KClickEventBuild
     data object OpenUrl : KClickEventType<OpenUrl, KClickEventBuilder.OpenUrl> {
         override fun builder() = KClickEventBuilder.OpenUrl()
     }
-
     data object OpenFile : KClickEventType<OpenFile, KClickEventBuilder.OpenFile> {
         override fun builder() = KClickEventBuilder.OpenFile()
     }
@@ -33,6 +36,12 @@ sealed interface KClickEventType<T : KClickEventType<T, B>, B : KClickEventBuild
     }
     data object Callback : KClickEventType<Callback, KClickEventBuilder.Callback> {
         override fun builder() = KClickEventBuilder.Callback()
+    }
+    data object ShowDialog : KClickEventType<ShowDialog, KClickEventBuilder.ShowDialog> {
+        override fun builder() = KClickEventBuilder.ShowDialog()
+    }
+    data object Custom : KClickEventType<Custom, KClickEventBuilder.Custom> {
+        override fun builder() = KClickEventBuilder.Custom()
     }
 
     fun builder(): B
@@ -127,6 +136,16 @@ sealed interface KClickEventBuilder<T : KClickEventType<T, B>, B : KClickEventBu
         override fun buildClickEvent() = ClickEvent.callback(callback, options.build())
     }
 
+    class ShowDialog : KClickEventBuilder<KClickEventType.ShowDialog, ShowDialog> {
+        lateinit var dialog: DialogLike
+        override fun buildClickEvent() = ClickEvent.showDialog(dialog)
+    }
+
+    class Custom : KClickEventBuilder<KClickEventType.Custom, Custom> {
+        lateinit var key: Key
+        lateinit var nbt: BinaryTagHolder
+        override fun buildClickEvent() = ClickEvent.custom(key, nbt)
+    }
 
     fun buildClickEvent(): ClickEvent
 }
